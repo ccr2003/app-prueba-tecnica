@@ -1,4 +1,10 @@
-import { Component, computed, OnInit } from '@angular/core';
+import {
+  Component,
+  computed,
+  HostListener,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { BadgeModule } from 'primeng/badge';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
@@ -26,7 +32,20 @@ import { Menu } from 'primeng/menu';
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  ngOnInit(): void {
+    this.onWindowResize();
+  }
+
+  @HostListener('window:resize')
+  onWindowResize(): void {
+    this.isMobile.set(window.innerWidth < 768);
+    this.isMediumMobile.set(window.innerWidth < 1125);
+  }
+
+  protected isMobile = signal<boolean>(false);
+  protected isMediumMobile = signal<boolean>(false);
+
   protected urlLogo: string =
     'https://contratalo.startupdev.tech/assets/svg/logo.svg';
 
@@ -39,7 +58,7 @@ export class NavbarComponent {
     label: 'Servicios',
   };
 
-  readonly itemsServicios = computed<MenuItem[]>(() => [
+  readonly itemsServicios = signal<MenuItem[]>([
     {
       label: 'Plomeria',
       icon: 'pi pi-wrench',
@@ -73,7 +92,7 @@ export class NavbarComponent {
     },
   ]);
 
-  readonly itemsCuenta = computed<MenuItem[]>(() => [
+  private readonly baseItemsCuenta = signal<MenuItem[]>([
     {
       label: 'Mi perfil',
       icon: 'pi pi-user',
@@ -96,4 +115,36 @@ export class NavbarComponent {
       icon: 'pi pi-sign-out',
     },
   ]);
+
+  private readonly mobileItemsCuenta = signal<MenuItem[]>([
+    {
+      label: 'Gasfitería',
+      icon: 'pi pi-tools',
+    },
+    {
+      label: 'Albañilería',
+      icon: 'pi pi-building',
+    },
+    {
+      label: 'Herrería',
+      icon: 'pi pi-shield',
+    },
+    {
+      label: 'Mecánica',
+      icon: 'pi pi-car',
+    },
+  ]);
+
+  readonly itemsCuenta = computed<MenuItem[]>(() => {
+    const baseItems = this.baseItemsCuenta();
+    if (this.isMediumMobile()) {
+      return [
+        { label: 'Cuenta', items: baseItems },
+        { label: 'Servicios', items: this.itemsServicios() },
+      ];
+    } else {
+      return baseItems;
+    }
+  });
+  expandItemsCuenta() {}
 }

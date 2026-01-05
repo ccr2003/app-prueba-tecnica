@@ -4,14 +4,16 @@
         <div class="flex items-center">
             <div class="flex items-center gap-2">
                 <img [src]="urlLogo" alt="Logo" class="w-10 h-10">
-                <div class="flex flex-col">
-                    <span class="text-surface-900 leading-[1.25] text-lg font-semibold">contratalo.pe</span>
-                    <span class="text-surface-500 leading-[1.25] text-sm">Especialistas cerca a ti</span>
-                </div>
+                @if(!isMediumMobile()){
+                    <div class="flex flex-col">
+                        <span class="text-surface-900 leading-[1.25] text-lg font-semibold">contratalo.pe</span>
+                        <span class="text-surface-500 leading-[1.25] text-sm">Especialistas cerca a ti</span>
+                    </div>
+                }
             </div>
         </div>
         <!-- Autcompletado -->
-        <div class="flex-1 max-w-2xl mx-8">
+        <div class="flex-1 max-w-2xl sm:mx-8 mx-2">
             <div class="relative">
                 <p-auto-complete optionlabel="name" [placeholder]="acItems.placeholder" />
                 <button type="button"
@@ -22,22 +24,28 @@
         </div>
         <div class="flex items-center">
             <!-- ButtonServicios -->
-            <div class="px-4">
-                <p-button (click)="menu.toggle($event)" [icon]="btnServiciosItem.icon" [label]="btnServiciosItem.label"
-                    severity="contrast" iconPos="right" />
-                <p-menu #menu [model]="itemsServicios()" [popup]="true" />
-            </div>
+             @if(!isMediumMobile()){
+                 <div class="px-4">
+                     <p-button (click)="menu.toggle($event)" [icon]="btnServiciosItem.icon" [label]="btnServiciosItem.label"
+                         severity="contrast" iconPos="right" />
+                     <p-menu #menu [model]="itemsServicios()" [popup]="true" />
+                 </div>
+             }
             <!-- BadgeNotificaciones -->
-            <div class="px-4">
-                <p-overlay-badge value="2" severity="danger">
-                    <i class="pi pi-bell cursor-pointer text-surface-600 hover:text-surface-800 transition-colors"
-                        style="font-size: 1.5rem;"></i>
-                </p-overlay-badge>
-            </div>
+             @if(!isMediumMobile()){
+                 <div class="px-4">
+                     <p-overlay-badge value="2" severity="danger">
+                         <i class="pi pi-bell cursor-pointer text-surface-600 hover:text-surface-800 transition-colors"
+                             style="font-size: 1.5rem;"></i>
+                     </p-overlay-badge>
+                 </div>
+             }
             <!-- MenuCuenta -->
-            <div class="px-4">
+            <div class="p-0 sm:px-4">
                 <div class="flex items-center gap-1">
-                    <p-avatar label="RC" size="normal" shape="circle"></p-avatar>
+                    @if(!isMobile()){
+                        <p-avatar label="RC" size="normal" shape="circle"></p-avatar>
+                    }
                     <p-button severity="contrast" (click)="menuCuenta.toggle($event)">
                         <button type="button" class="p-ripple p-component p-button-contrast p-button-text">
                             <div class="flex flex-col items-start">
@@ -53,9 +61,12 @@
                 </div>
                 <p-menu #menuCuenta [model]="itemsCuenta()" [popup]="true" />
             </div>
-            <div class="pl-4">
-                <p-button severity="secondary" variant="outlined" label="Acceder" icon="pi pi-user" />
-                <p-button severity="primary" label="Publicar anuncio" icon="pi pi-pen-to-square" styleClass="ml-2 text-red-50"/>
-            </div>
+            @if(!isMediumMobile()){
+                <div class="pl-4">
+                    <p-button severity="secondary" variant="outlined" label="Acceder" icon="pi pi-user" />
+                    <p-button severity="primary" label="Publicar anuncio" icon="pi pi-pen-to-square"
+                        styleClass="ml-2 text-red-50" />
+                </div>
+            }
         </div>
     </div>
