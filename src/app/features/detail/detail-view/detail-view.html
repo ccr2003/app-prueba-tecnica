@@ -1,0 +1,106 @@
+<div class="min-h-screen bg-white">
+    <div class="max-w-screen-2xl mx-auto px-6 py-6">
+        <app-detail-header />
+        <app-detail-gallery />
+        <div class="border-b border-gray-200 mb-6">
+            <div class="flex gap-8">
+                <button class="pb-3 text-sm font-semibold text-gray-900 border-b-2 border-gray-900">Detalles</button>
+                <button class="pb-3 text-sm font-medium text-gray-600 hover:text-gray-900">Sobre el
+                    Especialista</button>
+                <button class="pb-3 text-sm font-medium text-gray-600 hover:text-gray-900">Áreas de Atención</button>
+                <button class="pb-3 text-sm font-medium text-gray-600 hover:text-gray-900">Reseñas</button>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+                <section class="mb-8">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Sobre el Servicio</h2>
+                    <p class="text-gray-700 leading-relaxed">Nuestros servicios de construcción y remodelación incluyen
+                        una amplia gama de actividades como obras nuevas, reformas de edificios, acabados, instalaciones
+                        (electricidad, gasfitería), demolición y mantenimiento residenciales, comerciales, industriales
+                        u obra civil. En nuestra sección de Construcción Civil, nos enfocamos en ofrecer soluciones
+                        efectivas para proyectos de gran envergadura. Nuestro equipo de expertos trabaja con los más
+                        altos estándares de calidad y seguridad, asegurando la entrega puntual de cada proyecto dentro
+                        del presupuesto establecido. </p>
+                    <button
+                        class="text-primary-600 font-medium mt-3 hover:text-primary-700 flex items-center gap-1 transition-colors">
+                        Ver más
+                        <i class="pi pi-chevron-down text-xs"></i>
+                    </button>
+                </section>
+                <p-divider layout="horizontal" type="dashed" />
+                <section class="mb-8">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Sobre el Especialista</h2>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <div class="mb-6">
+                                <h3 class="text-sm font-semibold text-gray-900 mb-2">Nombre o Razón Social</h3>
+                                <p class="text-sm text-gray-700">Alev "Complementos para la Construcción"</p>
+                            </div>
+                            <div class="mb-6">
+                                <h3 class="text-sm font-semibold text-gray-900 mb-3">Métodos de pago</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    @for (item of especialistaPayments(); track $index) {
+                                    <span
+                                        class="inline-flex items-center px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-xs font-medium border border-green-200">
+                                        {{item}}
+                                    </span>
+                                    }
+                                    <button (click)="toggleEspecialistaPayments()"
+                                        class="inline-flex items-center gap-1 px-3 py-1.5 text-primary-600 hover:text-primary-700 rounded-full text-xs font-semibold transition-colors">
+                                        {{flagEspecialistaPayments()?'Ver más':'Ver menos'}}
+                                        <i class="pi pi-chevron-down text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-900 mb-2">Dirección</h3>
+                                <p class="text-sm text-gray-700">Av. Manuel Segura 1486, Cercado de Lima, Lima, Perú</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="mb-6">
+                                <h3 class="text-sm font-semibold text-gray-900 mb-2">Número de RUC</h3>
+                                <p class="text-sm text-gray-700 font-mono">10709959559</p>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-900 mb-3">Idiomas</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    @for (item of especialistaIdiomas(); track $index) {
+                                    <span
+                                        class="inline-flex items-center px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-xs font-medium border border-blue-200">
+                                        {{item}}
+                                    </span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <p-divider layout="horizontal" type="dashed" />
+                <section class="mb-8">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Áreas de Atención</h2>
+                    <div class="flex flex-wrap gap-2">
+                        @for (item of areasAtencion(); track $index) {
+                        <span
+                            class="inline-flex items-center px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium border border-purple-200 hover:bg-purple-100 transition-colors">
+                            {{item}}
+                        </span>
+                        }
+                        <button
+                            (click)="toggleAreasAtencion()"
+                            class="inline-flex items-center gap-1 px-3 py-2 text-primary-600 hover:text-primary-700 rounded-lg text-sm font-semibold transition-colors"><!---->
+                            {{flagAreasAtencion()?'Ver más':'Ver menos'}}
+                            <i class="pi pi-chevron-down text-xs"></i>
+                        </button>
+                    </div>
+                </section>
+                <p-divider layout="horizontal" type="dashed" />
+                <app-detail-reviews/>
+            </div>
+            <div class="lg:col-span-1">
+                <app-detail-info />
+            </div>
+        </div>
+    </div>
+</div>

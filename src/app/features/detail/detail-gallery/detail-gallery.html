@@ -1,0 +1,56 @@
+<div class="grid grid-cols-2 gap-2 mb-6">
+    <div class="row-span-2">
+        <p-image alt="Proyecto principal"
+            (click)="abrirDialogGallery()"
+            imageClass="w-full h-[400px] object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+            src="https://picsum.photos/seed/construction1/800/600"/>
+    </div>
+    <p-image alt="Proyecto 2"
+        (click)="abrirDialogGallery()"
+        imageClass="w-full h-[192px] object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+        src="https://picsum.photos/seed/construction2/800/600"></p-image>
+    <div class="relative">
+        <p-image alt="Proyecto 3" imageClass="h-[192px] object-cover rounded-lg w-full"
+            src="https://picsum.photos/seed/construction3/800/600"></p-image>
+        <button type="button"
+            (click)="abrirDialogGallery()"
+            class="absolute inset-0 bg-black bg-opacity-60 hover:bg-opacity-70 rounded-lg flex items-center justify-center cursor-pointer transition-all border-0">
+            <span class="text-white font-semibold text-base flex items-center gap-2">
+                <i class="pi pi-images text-lg"></i>
+                <span>Ver Todas las Fotos</span>
+            </span>
+        </button>
+    </div>
+</div>
+
+<p-dialog 
+    [(visible)]="showGalleryDialog" 
+    [modal]="true" 
+    [style]="{ width: '70vw' }"
+    [breakpoints]="{ '960px': '60vw', '640px': '90vw' }" 
+    [dismissableMask]="false" 
+    [closable]="true"
+    [draggable]="false" 
+    [resizable]="false" 
+    appendTo="body" 
+    [baseZIndex]="1000" 
+    (onHide)="onDialogClose()"
+    >
+    <ng-template pTemplate="header">
+        <h3 class="text-xl font-semibold">
+            Galeria de Fotos ({{signalGalleryImages().length}})
+        </h3>
+    </ng-template>
+
+    @if (galleryDialogKey() >= 0 ) {
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        @for (item of signalGalleryImages(); track $index) {
+            <p-image
+                [src]="item.src"
+                [preview]="true"
+                imageclass="w-full h-64 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+            />
+        }
+    </div>
+    }
+</p-dialog>

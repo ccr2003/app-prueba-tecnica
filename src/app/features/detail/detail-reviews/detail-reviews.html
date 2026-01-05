@@ -1,0 +1,106 @@
+<section>
+    <h2 class="text-xl font-semibold text-gray-900 mb-6">Reseñas</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="flex flex-col items-center justify-center border-r border-dashed border-gray-300">
+            <h3 class="text-base font-medium text-gray-700 mb-3">Reseñas Totales</h3>
+            <div class="text-5xl font-bold text-gray-900 mb-2"> ∠ 32 </div>
+            <p class="text-sm text-gray-500">Opiniones de usuarios verificados</p>
+        </div>
+        <div class="flex flex-col items-center justify-center border-r border-dashed border-gray-300">
+            <h3 class="text-base font-medium text-gray-700 mb-3">Calificación General</h3>
+            <div class="flex items-center justify-center gap-2 mb-2">
+                <i class="pi pi-star-fill text-yellow-400 text-2xl"></i>
+                <span class="text-5xl font-bold text-gray-900">4.7</span>
+                <span class="text-2xl text-gray-500">/5</span>
+            </div>
+            <p class="text-sm text-gray-500">Promedio actual según valoraciones</p>
+        </div>
+        <div>
+            @for (item of itemsRating(); track $index) {
+            <div class="flex items-center gap-3 mb-2">
+                <div class="flex items-center gap-0.5 w-10">
+                    <span class="text-base text-gray-700">{{ item.stars }}</span>
+                    <i class="pi pi-star-fill text-yellow-400 text-xs"></i>
+                </div>
+                <div class="flex-1 bg-gray-200 rounded-full h-2.5">
+                    <div class="duration-300 h-2.5 rounded-full transition-all"
+                        [class.bg-green-500]="item.percentage > 0" [style.width]="item.percentage + '%'">
+                    </div>
+                </div>
+                <span class="text-base text-gray-600 w-14 text-right">
+                    {{ item.percentage }}%
+                </span>
+            </div>
+            }
+        </div>
+    </div>
+    <div class="border-t border-gray-200 my-6"></div>
+    <div class="flex items-center justify-between mb-6">
+        <h3 class="text-base font-semibold text-gray-900">Todas las reseñas</h3>
+        <div class="flex items-center gap-2">
+            <span class="text-base text-gray-600">Ordenar por:</span>
+            <p-button (click)="menu.toggle($event)" [icon]="btnMasPopularItem.icon"
+                [label]="itemsMasPopularSelected().label||btnMasPopularItem.label" severity="contrast"
+                iconPos="right" />
+            <p-menu #menu [model]="itemsMasPopular()" [popup]="true" />
+        </div>
+    </div>
+    <div class="space-y-6">
+        @for (review of itemsReviews(); track $index) {
+
+        <div class="pb-6 border-b border-gray-200">
+            <div class="grid grid-cols-4 gap-6">
+
+                <!-- Columna izquierda (3/4) -->
+                <div class="col-span-3">
+
+                    <!-- Rating -->
+                    <div class="mb-3">
+                        <p-rating [readonly]="true" [stars]="5" [(ngModel)]="review.rating" class="p-rating p-readonly">
+                        </p-rating>
+                    </div>
+
+                    <!-- Información del usuario -->
+                    <p class="text-base text-gray-400 mb-3">
+                        {{ review.name }} · {{ review.date }}
+                    </p>
+
+                    <!-- Comentario -->
+                    <p class="text-base text-gray-700 leading-relaxed">
+                        {{ review.comment }}
+                    </p>
+                </div>
+
+                <!-- Columna derecha (1/4) -->
+                <div class="col-span-1 flex flex-col items-start gap-4">
+
+                    <!-- Botones de utilidad -->
+                    <div class="text-left">
+                        <p class="text-base text-gray-600 mb-2">¿Es útil?</p>
+                        <div class="flex items-center gap-3">
+                            <button
+                                class="flex items-center gap-1 text-base text-gray-700 hover:text-gray-900 transition-colors">
+                                <i class="pi pi-thumbs-up"></i>
+                                <span>Sí ({{ review.likes }})</span>
+                            </button>
+                            <button
+                                class="flex items-center gap-1 text-base text-gray-700 hover:text-gray-900 transition-colors">
+                                <i class="pi pi-thumbs-down"></i>
+                                <span>No ({{ review.dislikes }})</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Botón reportar -->
+                    <button class="text-base text-gray-700 hover:text-gray-900 underline transition-colors">
+                        Reportar Reseña
+                    </button>
+                </div>
+            </div>
+        </div>
+        }
+        <div class="flex justify-center mt-8">
+            <p-button label="Visualizar más reseñas" severity="secondary"></p-button>
+        </div>
+    </div>
+</section>

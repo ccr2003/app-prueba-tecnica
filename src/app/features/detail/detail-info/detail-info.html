@@ -1,0 +1,102 @@
+<div class="bg-gray-50 rounded-lg p-6 sticky top-24">
+    <div class="flex items-center justify-between">
+        <p class="text-xs text-gray-500">Publicado por</p>
+        <span class="inline-flex items-center gap-1 px-1.5 py-0.25 bg-blue-100 text-blue-600 rounded text-xs
+            font-medium">
+            <i class="pi pi-verified text-blue-500 text-sm"></i>
+            Verificado
+        </span>
+    </div>
+    <div class="flex justify-center mb-3">
+        <img class="w-20 h-20 rounded-full object-cover border-2 border-gray-200"
+            src="https://picsum.photos/seed/alev-logo/200/200" alt="Alev logo">
+    </div>
+    <div class="text-center mb-4">
+        <h4 class="text-base font-semibold text-gray-900"> Alev "Complementos para la Construcción" </h4>
+    </div>
+    <div class="flex gap-2 mb-6 justify-center">
+        <p-button
+            styleClass="w-12 h-12 bg-purple-600 hover:bg-purple-700 text-white rounded-full flex items-center justify-center transition-colors shadow-sm border-none"
+            icon="pi pi-phone text-lg" />
+        <p-button
+            styleClass="w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center transition-colors shadow-sm border-none"
+            icon="pi pi-whatsapp text-lg" />
+        <p-button
+            styleClass="w-12 h-12 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors shadow-sm border-none"
+            icon="pi pi-envelope text-lg" />
+    </div>
+    <p-divider layout="horizontal" type="dashed" />
+    <div class="mb-6">
+        <h4 class="text-sm font-semibold text-gray-900 mb-2">Web</h4>
+        <a target="_blank"
+            class="text-sm text-primary-600 hover:text-primary-700 hover:underline flex items-center gap-1"
+            href="https://www.solucionesalev.com.pe">
+            www.solucionesalev.com.pe
+            <i class="pi pi-external-link text-xs"></i>
+        </a>
+    </div>
+    <p-divider layout="horizontal" type="dashed" />
+    <div class="mb-6">
+        <h4 class="text-sm font-semibold text-gray-900 mb-3">Redes Sociales</h4>
+        <div class="flex gap-3">
+            <a href="#"><i class="pi pi-facebook text-xl text-gray-600"></i></a>
+            <a href="#"><i class="pi pi-instagram text-xl text-gray-600"></i></a>
+            <a href="#"><i class="pi pi-tiktok text-xl text-gray-600"></i></a>
+            <a href="#"><i class="pi pi-youtube text-xl text-gray-600"></i></a>
+        </div>
+    </div>
+    <p-divider layout="horizontal" type="dashed" />
+    <div class="bg-white rounded-lg p-4 border border-gray-200">
+        <h4 class="text-sm font-semibold text-gray-900 mb-4">Contacto Rápido</h4>
+        <form [formGroup]="formMensaje" autocomplete="on" class="space-y-3">
+            <p-inputgroup>
+                <p-inputgroup-addon>
+                    <i class="pi pi-user"></i>
+                </p-inputgroup-addon>
+                <input pInputText
+                    [id]="'nombres'"
+                    type="text"
+                    [formControlName]="'nombres'"
+                    placeholder="Nombre Completo"
+                    autocomplete="nombres"
+                    class="w-full" 
+                />
+            </p-inputgroup>
+            <p-inputgroup>
+                <p-inputgroup-addon>
+                    <i class="pi pi-envelope"></i>
+                </p-inputgroup-addon>
+                <input pInputText
+                    [id]="'email'"
+                    type="email"
+                    [formControlName]="'email'"
+                    placeholder="Correo electrónico"
+                    autocomplete="email"
+                    class="w-full" 
+                />
+            </p-inputgroup>
+            <p-inputgroup>
+                <p-inputgroup-addon>
+                    <i class="pi pi-phone"></i>
+                </p-inputgroup-addon>
+                <input pInputText
+                    [id]="'telefono'"
+                    type="text"
+                    [formControlName]="'telefono'"
+                    placeholder="Telefono"
+                    autocomplete="telefono"
+                    class="w-full" 
+                />
+            </p-inputgroup>
+            <textarea pTextarea 
+                rows="5" 
+                cols="30" 
+                [id]="'mensaje'" 
+                [formControlName]="'mensaje'" 
+                class="w-full" 
+                placeholder="Mensaje">
+            </textarea>
+            <p-button type="submit" label="Enviar Mensaje" styleClass="text-sm w-full"/>
+        </form>
+    </div>
+</div>

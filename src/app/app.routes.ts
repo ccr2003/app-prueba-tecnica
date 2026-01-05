@@ -25,6 +25,14 @@ export const routes: Routes = [
           ),
         title: 'Vista Search',
       },
+      {
+        path: 'detail/:p',
+        loadChildren: () =>
+          import('./features/detail/detail.routes').then(
+            (m) => m.DETAIL_ROUTES
+          ),
+        title: 'Vista Detail',
+      },
     ],
   },
   {
