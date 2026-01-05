@@ -15,8 +15,11 @@ import {
   IAutoCompleteSearch,
   IButtonServicios,
 } from '../../interfaces/default.interface';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { Menu } from 'primeng/menu';
+import { FormsModule } from '@angular/forms';
+import { Dialog } from 'primeng/dialog';
+import { SignViewComponent } from '../sign/sign-view/sign-view';
 
 @Component({
   selector: 'app-navbar',
@@ -28,6 +31,9 @@ import { Menu } from 'primeng/menu';
     Menu,
     AvatarModule,
     AvatarGroupModule,
+    FormsModule,
+    SignViewComponent,
+    Dialog,
   ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
@@ -51,6 +57,7 @@ export class NavbarComponent implements OnInit {
 
   protected acItems: IAutoCompleteSearch = {
     placeholder: '¿Qué especialista estas buscando?',
+    value: undefined,
   };
 
   protected btnServiciosItem: IButtonServicios = {
@@ -58,39 +65,22 @@ export class NavbarComponent implements OnInit {
     label: 'Servicios',
   };
 
-  readonly itemsServicios = signal<MenuItem[]>([
-    {
-      label: 'Plomeria',
-      icon: 'pi pi-wrench',
-    },
-    {
-      label: 'Electricidad',
-      icon: 'pi pi-bolt',
-    },
-    {
-      label: 'Carpintería',
-      icon: 'pi pi-hammer',
-    },
-    {
-      label: 'Pintura',
-      icon: 'pi pi-palette',
-    },
-    {
-      label: 'Limpieza',
-      icon: 'pi pi-sparkles',
-    },
-    {
-      label: 'Jardinería',
-    },
-    {
-      label: 'Reparaciones',
-      icon: 'pi pi-cog',
-    },
-    {
-      label: 'Instalaciones',
-      icon: 'pi pi-plus-circle',
-    },
-  ]);
+  readonly itemsServicios = signal<MenuItem[]>(
+    [
+      { label: 'Plomeria', icon: 'pi pi-wrench' },
+      { label: 'Electricidad', icon: 'pi pi-bolt' },
+      { label: 'Carpintería', icon: 'pi pi-hammer' },
+      { label: 'Pintura', icon: 'pi pi-palette' },
+      { label: 'Limpieza', icon: 'pi pi-sparkles' },
+      { label: 'Jardinería' },
+      { label: 'Reparaciones', icon: 'pi pi-cog' },
+      { label: 'Instalaciones', icon: 'pi pi-plus-circle' },
+    ].map((item) => ({
+      ...item,
+      command: ($event: MenuItemCommandEvent) =>
+        this.replaceAutoComplete($event),
+    }))
+  );
 
   private readonly baseItemsCuenta = signal<MenuItem[]>([
     {
@@ -116,25 +106,6 @@ export class NavbarComponent implements OnInit {
     },
   ]);
 
-  private readonly mobileItemsCuenta = signal<MenuItem[]>([
-    {
-      label: 'Gasfitería',
-      icon: 'pi pi-tools',
-    },
-    {
-      label: 'Albañilería',
-      icon: 'pi pi-building',
-    },
-    {
-      label: 'Herrería',
-      icon: 'pi pi-shield',
-    },
-    {
-      label: 'Mecánica',
-      icon: 'pi pi-car',
-    },
-  ]);
-
   readonly itemsCuenta = computed<MenuItem[]>(() => {
     const baseItems = this.baseItemsCuenta();
     if (this.isMediumMobile()) {
@@ -146,5 +117,21 @@ export class NavbarComponent implements OnInit {
       return baseItems;
     }
   });
-  expandItemsCuenta() {}
+
+  protected readonly signDialogKey = signal(0);
+  protected showSignDialog = signal(false);
+
+  replaceAutoComplete($event: MenuItemCommandEvent) {
+    this.acItems.value = $event.item?.label;
+  }
+
+  protected abrirDialogSign(): void {
+    this.signDialogKey.set(this.signDialogKey() + 1);
+    this.showSignDialog.set(true);
+  }
+
+  protected onDialogClose(): void {
+    this.showSignDialog.set(false);
+    this.signDialogKey.set(this.signDialogKey() - 1);
+  }
 }

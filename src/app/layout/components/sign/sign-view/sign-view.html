@@ -1,0 +1,29 @@
+<div class="flex flex-col ng-tns-c2196985156-4">
+    <div class="px-8 pt-4">
+        <div class="flex gap-6">
+            <button type="button"
+                (click)="changeDialogKey(INDEX_LOGIN)"
+                class="pb-4 text-sm font-medium text-surface-600 hover:text-surface-900 transition-colors"
+                [class.border-b-2]="selectedDialogKey()==INDEX_LOGIN"
+                [class.border-surface-900]="selectedDialogKey()==INDEX_LOGIN"
+                [class.text-surface-900]="selectedDialogKey()==INDEX_LOGIN">
+                
+                Iniciar Sesión
+            </button>
+            <button type="button"
+                (click)="changeDialogKey(INDEX_REGISTER)"
+                class="pb-4 text-sm font-semibold text-surface-600 hover:text-surface-900 transition-colors"
+                [class.border-b-2]="selectedDialogKey()==INDEX_REGISTER"
+                [class.border-surface-900]="selectedDialogKey()==INDEX_REGISTER"
+                [class.text-surface-900]="selectedDialogKey()==INDEX_REGISTER">
+                Registrar Cuenta
+            </button>
+        </div>
+    </div>
+    @if (selectedDialogKey()==INDEX_LOGIN) {
+        <app-login-dialog/>
+    }
+    @if (selectedDialogKey()==INDEX_REGISTER) {
+        <app-register-dialog/>
+    }
+</div>

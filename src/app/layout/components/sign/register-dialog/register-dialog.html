@@ -1,0 +1,123 @@
+<div class="px-8 py-6">
+    <div class="grid grid-cols-2 gap-3 mb-6">
+        <p-button severity="secondary" styleClass="w-full !border-surface-200 !rounded-lg" label="Google">
+            <img src="https://contratalo.startupdev.tech/assets/svg/google.svg" alt="Google" class="w-5 h-5">
+        </p-button>
+        <p-button severity="secondary" styleClass="w-full !border-surface-200 !rounded-lg text-blue-500" label="Facebook"
+            icon="pi pi-facebook">
+        </p-button>
+    </div>
+    <div class="flex items-center gap-3 my-6">
+        <div class="flex-1 border-t border-surface-300"></div><span
+            class="text-sm text-surface-500 font-medium">O</span>
+        <div class="flex-1 border-t border-surface-300"></div>
+    </div>
+    @if (formRegister) {
+        <!-- Form -->
+        <form [formGroup]="formRegister" autocomplete="on" class="space-y-3">
+            <!-- Nombres Input -->
+            <div class="flex flex-col gap-2">
+                <label
+                    [for]="'nombres'"
+                    class="text-sm font-semibold text-slate-900">
+                    Nombres
+                </label>
+                <input
+                    pInputText
+                    [id]="'nombres'"
+                    type="text"
+                    [formControlName]="'nombres'"
+                    placeholder="Ingresa tus nombres"
+                    autocomplete="name"
+                    class="w-full"
+                />
+            </div>
+            <!-- Apellidos Input -->
+            <div class="flex flex-col gap-2">
+                <label
+                    [for]="'apellidos'"
+                    class="text-sm font-semibold text-slate-900">
+                    Apellidos
+                </label>
+                <input
+                    pInputText
+                    [id]="'apellidos'"
+                    type="text"
+                    [formControlName]="'apellidos'"
+                    placeholder="Ingresa tus apellidos"
+                    autocomplete="name"
+                    class="w-full"
+                />
+            </div>
+            <!-- Usuario Input -->
+            <div class="flex flex-col gap-2">
+                <label
+                    [for]="'email'"
+                    class="text-sm font-semibold text-slate-900">
+                    Correo electrónico
+                </label>
+                <input
+                    pInputText
+                    [id]="'email'"
+                    type="text"
+                    [formControlName]="'email'"
+                    placeholder="Ej: correo@ejemplo.com"
+                    autocomplete="username"
+                    class="w-full"
+                />
+            </div>
+
+            <!-- Password Input -->
+            <div class="flex flex-col gap-2">
+                <label
+                    [for]="'password'"
+                    class="text-sm font-semibold text-slate-900">
+                    Contraseña
+                </label>
+                <p-password
+                    [id]="'password'"
+                    [formControlName]="'password'"
+                    placeholder="Ingrese su contraseña"
+                    [toggleMask]="true"
+                    [feedback]="false"
+                    autocomplete="current-password"
+                    styleClass="w-full"
+                    [inputStyleClass]="'w-full'"
+                />
+            </div>
+
+            <!-- Forgot Password -->
+            <div class="flex items-center justify-end">
+                <a
+                    href="#"
+                    class="text-sm text-primary-600 hover:text-primary-700 font-medium transition-colors">
+                    Recuperar contraseña
+                </a>
+            </div>
+
+            <p-button
+                type="submit"
+                label="Registrar Cuenta"
+                styleClass="w-full justify-center"
+                size="small"
+            />
+
+            <div class="text-center border-slate-200">
+                <span class="text-slate-600">
+                    Al continuar, aceptas los
+                    <a
+                        href="#"
+                        class="text-sm text-primary-600 hover:text-primary-700 font-medium transition-colors">
+                        Términos del servicio
+                    </a>
+                    y
+                    <a
+                        href="#"
+                        class="text-sm text-primary-600 hover:text-primary-700 font-medium transition-colors">
+                        Política de privacidad
+                    </a>
+                </span>
+            </div>
+        </form>
+      }
+</div>
