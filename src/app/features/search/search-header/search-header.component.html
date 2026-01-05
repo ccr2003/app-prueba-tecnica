@@ -1,0 +1,34 @@
+<div class="bg-white">
+    <div class="flex items-center justify-between">
+        <h1 class="text-lg font-semibold text-gray-900"> +2,000 resultados disponibles para "gasfitero" </h1>
+        <div class="relative">
+            <p-button severity="secondary" (click)="menu.toggle($event)">
+                <div class="flex items-center gap-2">
+                    <span class="text-sm text-gray-700">Ordenar por</span>
+                    <span class="text-sm font-semibold text-gray-900">{{itemsMasPopularSelected().label}}</span>
+                    <i class="pi pi-chevron-down text-xs text-gray-600"></i>
+                </div>
+            </p-button>
+            <p-menu #menu [model]="itemsMasPopular()" [popup]="true" appendTo="body" styleclass="min-w-[200px] custom-p-menu">
+            </p-menu>
+        </div>
+    </div>
+    <p-divider layout="horizontal" type="dashed" />
+    @if (itemsButton().length) {
+    <div class="flex items-center gap-2 flex-wrap">
+        @for (item of itemsButton(); track $index) {
+        <button (click)="removeItem($index)" type="button"
+            class="inline-flex items-center gap-2 bg-primary-100 hover:bg-primary-200 rounded-md px-3 py-1.5 text-sm transition-colors cursor-pointer group">
+            <span>{{item}}</span>
+            <i class="pi pi-times group-hover:text-primary-800" style="font-size: 10px;"></i>
+        </button>
+        }
+        <p-button severity="secondary" (click)="removeAllItems()">
+            <div class="flex items-center gap-2">
+                <span class="text-sm font-semibold text-gray-900">Limpiar filtros</span>
+            </div>
+        </p-button>
+    </div>
+    <p-divider layout="horizontal" type="dashed" />
+    }
+</div>

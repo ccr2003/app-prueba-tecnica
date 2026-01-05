@@ -1,0 +1,53 @@
+<div class="flex-1">
+    <div class="space-y-4">
+        @for (item of itemsCards(); track $index) {
+        <div class="bg-white rounded-lg">
+            <div class="flex items-stretch gap-4">
+                <div class="relative flex-shrink-0">
+                    <img class="w-[250px] h-[200px] object-cover rounded-lg" [src]="item.image.src"
+                        [alt]="item.image.alt">
+                </div>
+                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-1 mb-1">
+                            <h3 class="text-base font-normal text-gray-900">
+                                {{item.enterprise.abrev}}
+                                <span class="font-semibold">{{item.enterprise.name}}</span>
+                            </h3>
+                            <i class="pi pi-verified text-blue-500 text-sm"></i>
+                        </div>
+                        <p class="text-base font-semibold text-gray-900 mb-3">{{item.enterprise.description}}</p>
+                        <div class="flex items-center gap-4 text-sm mb-3 flex-wrap">
+                            <div class="flex items-center gap-2">
+                                <span class="font-medium text-gray-900">{{item.enterprise.valoration}}</span>
+                                <p-rating [readonly]="true" stars="1" [(ngModel)]="valueRating" />
+                                <span class="text-gray-600">({{item.enterprise.countValorations}})</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-gray-600">
+                                <img src="https://contratalo.startupdev.tech/assets/svg/dollar.svg"
+                                    alt="Métodos de pago" class="w-4 h-4 opacity-60">
+                                <span>{{item.enterprise.methodPayment}}</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-gray-600">
+                                <img src="https://contratalo.startupdev.tech/assets/svg/talk.svg" alt="Idiomas"
+                                    class="w-4 h-4 opacity-60">
+                                <span>{{item.enterprise.languages}}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 text-sm text-gray-600">
+                            <i class="pi pi-map-marker text-gray-500"></i>
+                            <span>{{item.enterprise.ubication}}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end gap-3 mt-4">
+                        <p-button severity="secondary" icon="pi pi-bookmark" label="Guardar" size="small" />
+                        <p-button severity="contrast" label="Ver Perfil" size="small"
+                            styleclass="bg-gray-900 border-gray-900 hover:bg-gray-800" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p-divider layout="horizontal" type="dashed" />
+        }
+    </div>
+</div>

@@ -1,0 +1,19 @@
+::ng-deep {
+    .p-autocomplete {
+        width: 100% !important;
+
+        .p-autocomplete-input {
+            width: 100%;
+        }
+    }
+
+    .p-button-contrast {
+        background: transparent !important;
+        border-color: transparent !important;
+        color: var(--p-button-text-contrast-color) !important;
+
+        &:hover {
+            background-color: #f8fafc !important;
+        }
+    }
+}
